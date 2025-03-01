@@ -1,6 +1,6 @@
-import { AlertContext, MaterialContext } from "@/app/admin/dashboard/page";
 import { useContext, useState } from "react";
 import { ResponseType } from "../../../../libs/response";
+import { AlertContext, MaterialContext } from "@/components/context/context";
 
 export default function MaterialDeleteModal() {
   const context = useContext(MaterialContext);
@@ -34,11 +34,11 @@ export default function MaterialDeleteModal() {
       alertCtx?.setMessage(data.message);
       if (!response.ok) {
         alertCtx?.setSuccess(false);
-        alertCtx?.open && alertCtx?.open();
+        if (alertCtx?.open) alertCtx.open();
         closeModal();
       } else {
         alertCtx?.setSuccess(true);
-        alertCtx?.open && alertCtx?.open();
+        if (alertCtx?.open) alertCtx.open();
         deleteSuccess();
       }
     } catch (e) {

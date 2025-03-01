@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ReturnResponse } from "../../../../libs/response";
 import prisma from "../../../../libs/prisma_global";
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary, UploadApiErrorResponse, UploadApiResponse } from "cloudinary";
 
-const items = [{ id: 1, name: "Item 1" }];
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -15,7 +14,7 @@ export async function GET(req: NextRequest) {
   try {
     const params = req.nextUrl.searchParams;
 
-    const page: any = params.get("page") ? (params.get("page") == "all" ? "all" : Number(params.get("page"))) : 1;
+    const page: string | number = params.get("page") ? (params.get("page") == "all" ? "all" : Number(params.get("page"))) : 1;
     const size = 10;
 
     if (page == "all") {
@@ -33,7 +32,7 @@ export async function GET(req: NextRequest) {
         orderBy: {
           createdAt: "asc",
         },
-        skip: (page - 1) * size,
+        skip: (Number(page) - 1) * size,
         take: size,
       }),
       prisma.material.count({}),
@@ -62,12 +61,12 @@ export async function GET(req: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // Parse the incoming FormData
-    const formData: any = await request.formData();
+    const formData: FormData = await request.formData();
 
-    const name = formData.get("name");
-    const idDescription = formData.get("idDescription");
-    const enDescription = formData.get("enDescription");
-    const imageFile = formData.get("image");
+    const name = formData.get("name") as string;
+    const idDescription = formData.get("idDescription") as string;
+    const enDescription = formData.get("enDescription") as string;
+    const imageFile = formData.get("image") as File;
 
     // Validate required fields
     if (!name || !idDescription || !enDescription || !imageFile) {
@@ -79,16 +78,16 @@ export async function POST(request: NextRequest) {
     const base64Image = Buffer.from(imageBuffer).toString("base64");
     const dataURI = `data:${imageFile.type};base64,${base64Image}`;
 
-    const uploadResult: any = await new Promise((resolve, reject) => {
+    const uploadResult: UploadApiResponse = await new Promise((resolve, reject) => {
       cloudinary.uploader.upload(
         dataURI,
         {
           folder: "materials",
           resource_type: "image",
         },
-        (error, result) => {
+        (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
           if (error) reject(error);
-          else resolve(result);
+          else if (result) resolve(result);
         }
       );
     });

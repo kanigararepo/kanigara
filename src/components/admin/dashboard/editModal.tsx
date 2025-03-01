@@ -2,21 +2,10 @@
 
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { AlertContext, MaterialContext } from "@/app/admin/dashboard/page";
 import { ResponseType } from "../../../../libs/response";
+import { AlertContext, MaterialContext } from "@/components/context/context";
 
-// Material data type
-type Material = {
-  id: string;
-  name: string;
-  image: string;
-  enDescription: string;
-  idDescription: string;
-};
-
-interface MaterialEditProps {}
-
-export default function MaterialEditModal({}: MaterialEditProps) {
+export default function MaterialEditModal() {
   const context = useContext(MaterialContext);
   const alertCtx = useContext(AlertContext);
   const [formData, setFormData] = useState({
@@ -27,7 +16,6 @@ export default function MaterialEditModal({}: MaterialEditProps) {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   // Load current material data into form when modal opens
   useEffect(() => {
@@ -55,23 +43,26 @@ export default function MaterialEditModal({}: MaterialEditProps) {
     if (file) {
       // Check file size (limit to 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        setError("Image size must be less than 5MB");
+        alertCtx?.setMessage("Image size must be less than 5MB");
+        alertCtx?.setSuccess(true);
+        if (alertCtx?.open) alertCtx?.open();
         return;
       }
 
       // Check file type
       if (!file.type.startsWith("image/")) {
-        setError("File must be an image");
+        alertCtx?.setMessage("File must be an image");
+        alertCtx?.setSuccess(true);
+        if (alertCtx?.open) alertCtx?.open();
         return;
       }
 
-      setError("");
       setImageFile(file);
 
       // Create preview
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        setImagePreview(e.target.result as string);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        setImagePreview(e?.target?.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -81,7 +72,6 @@ export default function MaterialEditModal({}: MaterialEditProps) {
     e.preventDefault();
 
     setIsSubmitting(true);
-    setError("");
 
     try {
       // Create FormData object
@@ -106,7 +96,7 @@ export default function MaterialEditModal({}: MaterialEditProps) {
       if (!response.ok) {
         alertCtx?.setMessage(data.message);
         alertCtx?.setSuccess(false);
-        alertCtx?.open && alertCtx?.open();
+        if (alertCtx?.open) alertCtx?.open();
         return;
       }
 
@@ -117,17 +107,24 @@ export default function MaterialEditModal({}: MaterialEditProps) {
       context?.setShouldRefetch(true);
       alertCtx?.setMessage(data.message);
       alertCtx?.setSuccess(true);
-      alertCtx?.open && alertCtx?.open();
-      context?.setSelectedMaterial && context?.setSelectedMaterial(data.data);
-    } catch (error: any) {
-      console.error("Error updating material:", error);
-      setError(error.message || "Failed to update material");
+      if (alertCtx?.open) alertCtx?.open();
+      if (context?.setSelectedMaterial) context?.setSelectedMaterial(data.data);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        console.log(e.message);
+        alertCtx?.setMessage(e.message);
+      } else {
+        console.log("An unknown error occurred");
+        alertCtx?.setMessage("An unknown error occurred");
+      }
+      alertCtx?.setSuccess(true);
+      if (alertCtx?.open) alertCtx?.open();
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     const modalEdit = document.getElementById("edit_modal") as HTMLDialogElement;
     if (modalEdit) modalEdit.close();
   };

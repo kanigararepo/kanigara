@@ -1,8 +1,7 @@
-import { AlertContext } from "@/app/admin/dashboard/page";
+import { AlertContext } from "@/components/context/context";
 import { useContext } from "react";
 
-interface AlertProps {}
-export default function AlertModal({}: AlertProps) {
+export default function AlertModal() {
   const alertCtx = useContext(AlertContext);
 
   const closeModal = () => {

@@ -1,17 +1,10 @@
 import Image from "next/image";
 import hero from "@/assets/images/hero.png";
-import logo from "@/assets/images/logo.png";
-import navlogo from "@/assets/images/nav-logo.png";
-import icon from "@/assets/images/icon.png";
-import whyus from "@/assets/images/whyus.png";
-import aboutus from "@/assets/images/about-us.png";
-import bg1 from "@/assets/images/bg1.png";
 import line1 from "@/assets/images/line1.png";
 import line2 from "@/assets/images/line2.png";
 import line3 from "@/assets/images/line3.png";
 import line4 from "@/assets/images/line4.png";
 import line5 from "@/assets/images/line5.png";
-import Link from "next/link";
 import "@/components/home/home.css";
 import Customer from "@/components/home/customer";
 import Navbar from "@/components/home/navbar";

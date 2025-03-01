@@ -2,29 +2,18 @@
 
 import { useContext, useState } from "react";
 import Image from "next/image";
-import { MaterialContext } from "@/app/admin/dashboard/page";
 import MaterialDeleteModal from "./deleteModal";
 import MaterialEditModal from "./editModal";
+import { MaterialContext } from "@/components/context/context";
 
-// Material data type
-type Material = {
-  id: string;
-  name: string;
-  image: string;
-  enDescription: string;
-  idDescription: string;
-};
-
-interface MaterialProps {}
-
-export default function MaterialDetailModal({}: MaterialProps) {
+export default function MaterialDetailModal() {
   const context = useContext(MaterialContext);
   const [activeTab, setActiveTab] = useState<"id" | "en">("id");
 
   const closeModal = () => {
     const modalDetail: HTMLDialogElement | null = document.getElementById("detail_modal") as HTMLDialogElement;
     if (modalDetail) modalDetail.close();
-    context?.onClose && context?.onClose();
+    if (context?.onClose) context?.onClose();
   };
 
   return (
@@ -84,8 +73,8 @@ export default function MaterialDetailModal({}: MaterialProps) {
             type="button"
             className="btn btn-outline btn-error"
             onClick={() => {
-              const modalAdd: any = document.getElementById("delete_modal");
-              modalAdd.showModal();
+              const modalAdd = document.getElementById("delete_modal") as HTMLDialogElement | null;
+              modalAdd?.showModal();
             }}
           >
             Hapus
@@ -94,8 +83,8 @@ export default function MaterialDetailModal({}: MaterialProps) {
             type="button"
             className="btn btn-outline btn-primary"
             onClick={() => {
-              const modalAdd: any = document.getElementById("edit_modal");
-              modalAdd.showModal();
+              const modalAdd = document.getElementById("edit_modal") as HTMLDialogElement | null;
+              modalAdd?.showModal();
             }}
           >
             Edit

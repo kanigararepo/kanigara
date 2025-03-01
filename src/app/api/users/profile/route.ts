@@ -1,12 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../../libs/prisma_global";
-import { RequestHandler, ResponseType, ReturnResponse } from "../../../../../libs/response";
-import bcrypt from "bcrypt";
+import { ReturnResponse } from "../../../../../libs/response";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { User } from "@prisma/client";
 
-const { JWT_SECRET }: any = process.env;
+const { JWT_SECRET } = process.env;
 
 export async function GET() {
   const store = await cookies();
@@ -17,15 +15,15 @@ export async function GET() {
   }
 
   try {
-    const decoded = jwt.verify(token.value, JWT_SECRET) as User;
+    const decoded = jwt.verify(token.value, `${JWT_SECRET}`) as User;
 
-    const userData: any = await prisma.user.findUnique({ where: { id: decoded.id } });
+    const userData = await prisma.user.findUnique({ where: { id: decoded.id } });
 
     if (!userData) {
       return ReturnResponse(403, "Token tidak valid", null);
     }
 
-    delete userData.password;
+    userData.password = "";
 
     return ReturnResponse(200, "Berhasil mendapatkan data profile", {
       user: userData,

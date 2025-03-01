@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { ReturnResponse } from "../../../../../libs/response";
 import prisma from "../../../../../libs/prisma_global";
-import { Params } from "next/dist/server/request/params";
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary, DeleteApiResponse, UploadApiErrorResponse, UploadApiResponse } from "cloudinary";
+import { Material } from "@prisma/client";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,7 +10,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
 
@@ -36,7 +36,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id: materialId } = await params;
 
@@ -50,25 +50,28 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     // Parse the incoming FormData
-    const formData: any = await request.formData();
+    const formData: FormData = await request.formData();
 
-    const name = formData.get("name");
-    const idDescription = formData.get("idDescription");
-    const enDescription = formData.get("enDescription");
-    const imageFile = formData.get("image");
+    const name = formData.get("name") as string;
+    const idDescription = formData.get("idDescription") as string;
+    const enDescription = formData.get("enDescription") as string;
+    const imageFile = formData.get("image") as File;
 
     // Prepare data object with provided values or existing values
-    const updateData: any = {
+    const updateData: Material = {
       name: name || existingMaterial.name,
       idDescription: idDescription || existingMaterial.idDescription,
       enDescription: enDescription || existingMaterial.enDescription,
+      image: "",
+      id: existingMaterial.id,
+      createdAt: existingMaterial.createdAt,
       // Image will be updated below if a new one is provided
     };
 
     // Handle image update if a new image was provided
     if (imageFile && imageFile.size > 0) {
       // Extract public_id from existing cloud URL if it exists
-      let oldPublicId = null;
+      let oldPublicId = "";
       if (existingMaterial.image && typeof existingMaterial.image === "string") {
         const urlParts = existingMaterial.image.split("/");
         const filenamePart = urlParts[urlParts.length - 1];
@@ -83,16 +86,16 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       const base64Image = Buffer.from(imageBuffer).toString("base64");
       const dataURI = `data:${imageFile.type};base64,${base64Image}`;
 
-      const uploadResult: any = await new Promise((resolve, reject) => {
+      const uploadResult: UploadApiResponse = await new Promise((resolve, reject) => {
         cloudinary.uploader.upload(
           dataURI,
           {
             folder: "materials",
             resource_type: "image",
           },
-          (error: any, result: any) => {
+          (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
             if (error) reject(error);
-            else resolve(result);
+            else if (result) resolve(result);
           }
         );
       });
@@ -104,7 +107,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       if (oldPublicId) {
         try {
           await new Promise((resolve, reject) => {
-            cloudinary.uploader.destroy(oldPublicId, (error: any, result: any) => {
+            cloudinary.uploader.destroy(oldPublicId, (error: DeleteApiResponse | undefined, result: DeleteApiResponse | undefined) => {
               if (error) reject(error);
               else resolve(result);
             });

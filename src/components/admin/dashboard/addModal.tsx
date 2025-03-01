@@ -1,24 +1,29 @@
 "use client";
 
-import { FC, useContext, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useState } from "react";
 import Image from "next/image";
-import { AlertContext, MaterialContext } from "@/app/admin/dashboard/page";
+import { AlertContext, MaterialContext } from "@/components/context/context";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
-interface MaterialProps {}
-
-export default function MaterialModal({}: MaterialProps) {
+type MaterialForm = {
+  name: string;
+  image: File | string;
+  idDescription: string;
+  enDescription: string;
+};
+export default function MaterialModal() {
   const context = useContext(MaterialContext);
   const alertCtx = useContext(AlertContext);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<MaterialForm>({
     name: "",
     image: "",
     idDescription: "",
     enDescription: "",
   });
-  const [imagePreview, setImagePreview] = useState<any>(null);
+  const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | StaticImport | undefined | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -26,8 +31,8 @@ export default function MaterialModal({}: MaterialProps) {
     }));
   };
 
-  const handleImageChange = (e: any) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e?.target?.files && e?.target?.files[0];
     if (file) {
       // For preview
       const reader = new FileReader();
@@ -45,7 +50,7 @@ export default function MaterialModal({}: MaterialProps) {
     }
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -75,7 +80,7 @@ export default function MaterialModal({}: MaterialProps) {
       if (!response.ok) {
         alertCtx?.setMessage(data.message);
         alertCtx?.setSuccess(false);
-        alertCtx?.open && alertCtx?.open();
+        if (alertCtx?.open) alertCtx?.open();
         return;
       }
 
@@ -90,7 +95,7 @@ export default function MaterialModal({}: MaterialProps) {
       context?.setShouldRefetch(true);
       alertCtx?.setMessage(data.message);
       alertCtx?.setSuccess(true);
-      alertCtx?.open && alertCtx?.open();
+      if (alertCtx?.open) alertCtx?.open();
 
       // Close the modal (assuming there's a close button with method="dialog")
       closeModal();
@@ -102,8 +107,8 @@ export default function MaterialModal({}: MaterialProps) {
   };
 
   const closeModal = () => {
-    const modalAdd: any = document.getElementById("my_modal_1");
-    modalAdd.close();
+    const modalAdd = document.getElementById("my_modal_1") as HTMLDialogElement | null;
+    modalAdd?.close();
   };
 
   return (
@@ -127,7 +132,7 @@ export default function MaterialModal({}: MaterialProps) {
             <div className="mt-2">
               <p className="text-sm mb-1">Preview:</p>
               <div className="relative h-40 w-40 border rounded-md overflow-hidden">
-                <Image src={imagePreview} alt="Preview" fill style={{ objectFit: "cover" }} />
+                <Image src={`${imagePreview}`} alt="Preview" fill style={{ objectFit: "cover" }} />
               </div>
             </div>
           )}

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import icon from "@/assets/images/icon.png";
 import whyus from "@/assets/images/whyus.png";
-import Link from "next/link";
 import "@/components/home/home.css";
 
 interface Props {

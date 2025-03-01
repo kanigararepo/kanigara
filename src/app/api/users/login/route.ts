@@ -1,11 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../../../libs/prisma_global";
-import { RequestHandler, ResponseType, ReturnResponse } from "../../../../../libs/response";
+import { ReturnResponse } from "../../../../../libs/response";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 
-const { JWT_SECRET }: any = process.env;
+const { JWT_SECRET } = process.env;
 
 export async function POST(req: Request) {
   try {
@@ -13,7 +12,7 @@ export async function POST(req: Request) {
 
     const { username, password } = await req.json();
 
-    const user: any = await prisma.user.findUnique({ where: { username } });
+    const user = await prisma.user.findUnique({ where: { username } });
 
     if (!user) {
       return ReturnResponse(401, "Username atau Password salah", null);
@@ -25,9 +24,9 @@ export async function POST(req: Request) {
       return ReturnResponse(401, "Username atau Password salah", null);
     }
 
-    delete user.password;
+    user.password = "";
 
-    const token = jwt.sign(user, JWT_SECRET);
+    const token = jwt.sign(user, `${JWT_SECRET}`);
 
     // Set the cookie
     store.set("token", token, {

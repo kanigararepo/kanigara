@@ -3,10 +3,11 @@
 import MaterialModal from "@/components/admin/dashboard/addModal";
 import AlertModal from "@/components/admin/dashboard/alertModal";
 import MaterialDetailModal from "@/components/admin/dashboard/detailModal";
+import { AlertContext, MaterialContext } from "@/components/context/context";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import {} from "react";
 
 // Mock data type - replace with your actual data type
 type Material = {
@@ -17,44 +18,21 @@ type Material = {
   idDescription: string;
 };
 
-type MaterialContextType = {
-  setShouldRefetch: (value: boolean) => void;
-  setSelectedMaterial?: (value: Material) => void;
-  selectedMaterial?: Material;
-  onClose?: (value: void) => void;
-};
-
-type AlertContextType = {
-  success?: boolean;
-  message?: string;
-  setSuccess: (value: boolean) => void;
-  setMessage: (value: string) => void;
-  open?: (value: void) => void;
-};
-
-export const MaterialContext = createContext<MaterialContextType | undefined>(undefined);
-export const AlertContext = createContext<AlertContextType | undefined>(undefined);
-
 export default function Dashboard() {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
   const [materials, setMaterials] = useState<Material[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [shouldRefetch, setShouldRefetch] = useState(true);
   // Add state for selected material
-  const [selectedMaterial, setSelectedMaterial] = useState<any | null>(null);
+  const [selectedMaterial, setSelectedMaterial] = useState<Material | null>(null);
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`/api/users/profile`, {
-          method: "GET",
-        });
-
+        const response = await fetch(`/api/users/profile`, { method: "GET" });
         await response.json();
 
         if (!response.ok) {
@@ -66,7 +44,7 @@ export default function Dashboard() {
     };
 
     fetchProfile();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const fetchMaterial = async () => {
@@ -94,7 +72,7 @@ export default function Dashboard() {
     if (shouldRefetch) {
       fetchMaterial();
     }
-  }, [shouldRefetch, currentPage]);
+  }, [shouldRefetch, currentPage, router]);
 
   const handlePagination = (direction: "prev" | "next") => {
     setCurrentPage((prev) => (direction === "prev" ? Math.max(1, prev - 1) : Math.min(totalPages, prev + 1)));
@@ -107,9 +85,9 @@ export default function Dashboard() {
       <div className="flex justify-end">
         <button
           className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-500 text-white mb-4"
-          onClick={() => {
-            const modalAdd: any = document.getElementById("my_modal_1");
-            modalAdd.showModal();
+          onClick={(): void => {
+            const modalAdd = document.getElementById("my_modal_1") as HTMLDialogElement | null;
+            modalAdd?.showModal();
           }}
         >
           Tambah Material
@@ -122,8 +100,8 @@ export default function Dashboard() {
               setMessage,
               setSuccess,
               open: () => {
-                const modalAdd: any = document.getElementById("alert_modal");
-                modalAdd.showModal();
+                const modalAdd = document.getElementById("alert_modal") as HTMLDialogElement | null;
+                modalAdd?.showModal();
               },
             }}
           >
@@ -141,7 +119,7 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {materials.map((material: any) => (
+            {materials.map((material: Material) => (
               <tr key={material.id}>
                 <td className="px-6 py-4 whitespace-nowrap w-32 h-32 relative">
                   <Image src={`${material.image}`} alt={material.name} fill className=" px-4 py-4 object-contain rounded" />
@@ -151,8 +129,8 @@ export default function Dashboard() {
                   <button
                     onClick={() => {
                       setSelectedMaterial(material);
-                      const modalAdd: any = document.getElementById("detail_modal");
-                      modalAdd.showModal();
+                      const modalAdd = document.getElementById("detail_modal") as HTMLDialogElement | null;
+                      modalAdd?.showModal();
                     }}
                     className="px-4 py-2 bg-blue-600 rounded text-white hover:bg-blue-500"
                   >
@@ -173,8 +151,8 @@ export default function Dashboard() {
             setMessage,
             setSuccess,
             open: () => {
-              const modalAdd: any = document.getElementById("alert_modal");
-              modalAdd.showModal();
+              const modalAdd = document.getElementById("alert_modal") as HTMLDialogElement | null;
+              modalAdd?.showModal();
             },
           }}
         >

@@ -1,9 +1,7 @@
 "use client";
 
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { NextResponse } from "next/server";
-import { FormEvent, FormEventHandler, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -38,8 +36,12 @@ export default function AdminDashboard() {
       } else {
         router.push("/admin/dashboard");
       }
-    } catch (e: any) {
-      console.log(e.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        console.log(e.message);
+      } else {
+        console.log("An unknown error occurred");
+      }
     } finally {
       setIsLoading(false);
     }

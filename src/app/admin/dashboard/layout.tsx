@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import { GetServerSideProps } from "next";
-import jwt from "jsonwebtoken";
 import DynamicSidebar from "@/components/admin/dashboard/sidebar";
 
 export const metadata: Metadata = {
@@ -9,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardAdminLayout({ children }: { children: React.ReactNode }) {
-  return <DynamicSidebar children={children} />;
+  return <DynamicSidebar>{children}</DynamicSidebar>;
 }

@@ -1,6 +1,3 @@
-import mediatanam from "@/assets/images/mediatanam.png";
-import material from "@/assets/images/material.png";
-import tanaman from "@/assets/images/tanaman.png";
 import Image from "next/image";
 import icon from "@/assets/images/icon.png";
 
