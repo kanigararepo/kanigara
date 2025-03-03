@@ -47,10 +47,32 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/icon.png" type="image/png" sizes="96x96" />
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="google-site-verification" content="LmqFd-BaksgDrNubYuaZf0JA7ulvw_ijYLZZy2N-YDY" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Kanigara Nurseries",
+              url: "https://kanigaranurseries.com",
+              logo: "https://kanigaranurseries.com/favicon.ico",
+              description: "Kanigara Nurseries menyediakan berbagai tanaman berkualitas untuk memperindah ruang hijau Anda.",
+              sameAs: ["https://www.instagram.com/kanigara.nurseries?igsh=eTExeWM5NGRyNnNx"],
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+62 822-1377-2860",
+                contactType: "customer service",
+                areaServed: "ID",
+                availableLanguage: ["Indonesian", "English"],
+              },
+            }),
+          }}
+        />
       </Head>
       <body className={`${jakartaSans.variable} antialiased scroll-smooth`}>{children}</body>
     </html>

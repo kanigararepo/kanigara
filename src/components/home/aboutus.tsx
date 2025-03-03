@@ -2,6 +2,7 @@ import Image from "next/image";
 import icon from "@/assets/images/icon.png";
 import aboutus from "@/assets/images/about-us.png";
 import "@/components/home/home.css";
+import Link from "next/link";
 
 interface Props {
   lang: "en" | "id";
@@ -46,9 +47,9 @@ export default function AboutUs({ lang }: Props) {
                 ))}
           </div>
           <div>
-            <a href="/documents/company_profile.pdf" download className="px-6 py-3 bg-lime-700 hover:bg-lime-600 rounded-full text-white font-semibold">
+            <Link href="/documents/katalog.pdf" target="_blank" className="px-6 py-3 bg-lime-700 hover:bg-lime-600 rounded-full text-white font-semibold">
               {lang == "id" ? "Dapatkan Company Profile" : "Get Company Profile"}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

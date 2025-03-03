@@ -57,7 +57,9 @@ export default function Footer({ lang }: Props) {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <span>+62 813-9494-2014</span>
+                <Link href={"https://wa.me/6282213772860"} className="hover:underline">
+                  +62 822-1377-2860
+                </Link>
               </div>
               <div className="flex items-center gap-2 text-white/80">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -96,7 +98,7 @@ export default function Footer({ lang }: Props) {
             <div className="flex items-center w-full bg-white rounded-full shadow-md px-5 py-2">
               <InputFooter lang={lang} />
             </div>
-            <Link href="/documents/katalog.pdf" className="flex items-center justify-between w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold px-5 py-2 rounded-full">
+            <Link href="/documents/katalog.pdf" target="_blank" className="flex items-center justify-between w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold px-5 py-2 rounded-full">
               <span> {lang == "id" ? "Katalog" : "Cataloque"}</span>
               <span className="bg-white p-2 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-green-700">
@@ -104,7 +106,7 @@ export default function Footer({ lang }: Props) {
                 </svg>
               </span>
             </Link>
-            <Link href="/documents/company_pdf.pdf" className="flex items-center justify-between w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold px-5 py-2 rounded-full">
+            <Link href="/documents/company_profile.pdf" target="_blank" className="flex items-center justify-between w-full bg-lime-600 hover:bg-lime-700 text-white font-semibold px-5 py-2 rounded-full">
               <span className="text-nowrap">Company Profile</span>
               <span className="bg-white p-2 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-green-700">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import icon from "@/assets/images/icon.png";
+import Link from "next/link";
 
 type Material = {
   id: string;
@@ -37,9 +38,9 @@ export default function Materials({ materials, lang }: MaterialProps) {
           })}
         </div>
         <div className="flex justify-center">
-          <a href={"/documents/katalog.pdf"} download className="mx-auto px-4 py-2 bg-lime-600 text-white font-semibold rounded-full hover:bg-lime-700 mt-4 ">
+          <Link href="/documents/katalog.pdf" target="_blank" className="mx-auto px-4 py-2 bg-lime-600 text-white font-semibold rounded-full hover:bg-lime-700 mt-4 ">
             {lang == "id" ? "Dapatkan Katalog" : "Get Full Catalogue"}
-          </a>
+          </Link>
         </div>
       </div>
     </section>
