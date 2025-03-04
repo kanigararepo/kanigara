@@ -9,7 +9,7 @@ export default function InputFooter({ lang }: Props) {
   const [message, setMessage] = useState("");
 
   const onSend = () => {
-    window.open(`https://wa.me/085219455690?text=${message}`, "_blank");
+    window.open(`https://wa.me/6285219455690?text=${message}`, "_blank");
   };
 
   return (

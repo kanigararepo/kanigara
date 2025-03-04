@@ -47,7 +47,7 @@ export default function AboutUs({ lang }: Props) {
                 ))}
           </div>
           <div>
-            <Link href="/documents/katalog.pdf" target="_blank" className="px-6 py-3 bg-lime-700 hover:bg-lime-600 rounded-full text-white font-semibold">
+            <Link href="/documents/company_profile.pdf" target="_blank" className="px-6 py-3 bg-lime-700 hover:bg-lime-600 rounded-full text-white font-semibold">
               {lang == "id" ? "Dapatkan Company Profile" : "Get Company Profile"}
             </Link>
           </div>

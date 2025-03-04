@@ -19,7 +19,7 @@ export default function Navbar({ lang }: Props) {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
-          <Link href="https://wa.me/085219455690" target="_blank" className="bg-white text-lime-700 font-semibold px-4 py-2 rounded-lg hover:bg-lime-700 hover:text-white transition">
+          <Link href="https://wa.me/6285219455690" target="_blank" className="bg-white text-lime-700 font-semibold px-4 py-2 rounded-lg hover:bg-lime-700 hover:text-white transition">
             {" "}
             {lang == "id" ? "Hubungi Kami" : "Contact Us"}
           </Link>
@@ -50,7 +50,7 @@ export default function Navbar({ lang }: Props) {
       {isOpen && (
         <div className="md:hidden absolute right-0 top-full mt-0 bg-white rounded-bl-lg shadow-lg w-64">
           <div className="flex flex-col py-4 w-full">
-            <Link href="https://wa.me/085219455690" target="_blank" className="px-8 py-3 text-lime-700 font-medium hover:bg-gray-100">
+            <Link href="https://wa.me/6285219455690" target="_blank" className="px-8 py-3 text-lime-700 font-medium hover:bg-gray-100">
               {lang == "id" ? "Hubungi Kami" : "Contact Us"}
             </Link>
             <div className="dropdown dropdown-end text-lime-700">

@@ -19,12 +19,33 @@ export default function Footer({ lang }: Props) {
             <Image src={logo} alt="Kanigara Nurseries" width={200} height={60} className="brightness-200 opacity-40" />
             <p className="text-white text-lg font-semibold">{lang == "id" ? "Follow kami di" : "Follow Us on"}</p>
             <div className="flex gap-4">
-              <Link target="_blank" href="#" className="text-white hover:text-white/80">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              <Link target="_blank" href="https://www.threads.net/@kanigara.nurseries" className="text-white hover:text-white/80">
+                <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M16.6627 11.124C16.5586 11.0743 16.4536 11.0266 16.3477 10.981C16.1627 7.567 14.2977 5.613 11.1657 5.593H11.1237C9.2507 5.593 7.6927 6.393 6.7337 7.848L8.4557 9.029C9.1717 7.942 10.2957 7.711 11.1247 7.711H11.1527C12.1837 7.717 12.9627 8.017 13.4657 8.601C13.8327 9.027 14.0777 9.616 14.1987 10.358C13.2205 10.1994 12.2276 10.1514 11.2387 10.215C8.2617 10.387 6.3467 12.124 6.4757 14.537C6.5407 15.76 7.1507 16.814 8.1927 17.501C9.0727 18.083 10.2077 18.367 11.3867 18.303C12.9447 18.218 14.1667 17.623 15.0187 16.537C15.6657 15.712 16.0747 14.643 16.2557 13.296C16.9977 13.744 17.5477 14.333 17.8517 15.041C18.3677 16.246 18.3977 18.225 16.7837 19.838C15.3687 21.252 13.6677 21.863 11.0977 21.882C8.2467 21.862 6.0897 20.947 4.6877 19.165C3.3747 17.495 2.6967 15.085 2.6717 12C2.6967 8.915 3.3747 6.504 4.6877 4.835C6.0897 3.053 8.2457 2.139 11.0977 2.118C13.9687 2.138 16.1627 3.058 17.6187 4.848C18.3327 5.727 18.8707 6.831 19.2257 8.118L21.2437 7.58C20.8137 5.995 20.1367 4.63 19.2167 3.497C17.3507 1.2 14.6207 0.024 11.1047 0H11.0907C7.5807 0.024 4.8827 1.205 3.0697 3.51C1.4557 5.56 0.623703 8.414 0.595703 11.992V12.008C0.623703 15.586 1.4557 18.439 3.0697 20.49C4.8827 22.795 7.5807 23.976 11.0897 24H11.1047C14.2247 23.978 16.4237 23.162 18.2347 21.351C20.6057 18.983 20.5347 16.015 19.7527 14.193C19.1927 12.886 18.1237 11.826 16.6627 11.124ZM11.2757 16.187C9.9707 16.261 8.6157 15.675 8.5477 14.421C8.4977 13.491 9.2097 12.452 11.3557 12.329C11.6017 12.3143 11.843 12.3073 12.0797 12.308C12.8597 12.308 13.5877 12.383 14.2507 12.528C14.0037 15.616 12.5537 16.117 11.2757 16.187Z"
+                    fill="white"
+                  />
                 </svg>
               </Link>
-              <Link target="_blank" href="#" className="text-white hover:text-white/80">
+              <Link target="_blank" href="https://www.tiktok.com/@kanigara.nurseries?_t=ZS-8uNWOpqfMPM&_r=1" className="text-white hover:text-white/80">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M1.5957 11.75C1.5957 6.68279 1.5957 4.14805 3.16973 2.57403C4.74376 1 7.27736 1 12.3457 1C17.4129 1 19.9476 1 21.5217 2.57403C23.0957 4.14805 23.0957 6.68166 23.0957 11.75C23.0957 16.8172 23.0957 19.3519 21.5217 20.926C19.9476 22.5 17.414 22.5 12.3457 22.5C7.27849 22.5 4.74376 22.5 3.16973 20.926C1.5957 19.3519 1.5957 16.8183 1.5957 11.75Z"
+                    stroke="white"
+                    strokeWidth="1.69737"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M10.689 10.6274C9.76106 10.4961 7.64501 10.7123 6.60848 12.6303C5.57196 14.5483 6.61641 16.5444 7.26933 17.3026C7.91319 18.0121 9.96022 19.3553 12.1317 18.0438C12.6704 17.719 13.3414 17.4757 14.1018 14.9353L14.0135 4.93896C13.8664 6.03999 15.0829 8.62225 18.5444 8.92778"
+                    stroke="white"
+                    strokeWidth="1.69737"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+              <Link target="_blank" href="https://www.facebook.com/share/15q1RyRkVm/" className="text-white hover:text-white/80">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
                 </svg>
@@ -42,7 +63,7 @@ export default function Footer({ lang }: Props) {
             <h3 className="text-white text-xl font-semibold">{lang == "id" ? "Hubungi Kami" : "Contact Us"}</h3>
             <div className="space-y-2">
               <p className="text-white/80 text-sm">
-               Jl. Randu Sari 38, Sinar Sari, Kec. Dramaga, Kabupaten Bogor, Jawa Barat 16680
+                Jl. Randu Sari 38, Sinar Sari, Kec. Dramaga, Kabupaten Bogor, Jawa Barat 16680
                 {/* <br />
                 Cilandak Barat, Jakarta Selatan
                 <br />
@@ -57,8 +78,8 @@ export default function Footer({ lang }: Props) {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <Link href={"https://wa.me/085219455690"} className="hover:underline">
-                  +62-85219455690
+                <Link href={"https://wa.me/6285219455690"} className="hover:underline">
+                  +62-852-1945-5690
                 </Link>
               </div>
               <div className="flex items-center gap-2 text-white/80">

@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   title: "Kanigara Nurseries - Grow with Us",
   description: "Kanigara Nurseries hadir untuk mewujudkan ruang hijau impian Anda dengan tanaman berkualitas tinggi.",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/icon?icon.png",
+    apple: "/icon?icon.png",
   },
   openGraph: {
     title: "Kanigara Nurseries - Grow with Us",
