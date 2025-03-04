@@ -68,7 +68,7 @@ export default async function LandingPage() {
       </section>
       <Customer lang="id" />
       <GrowWithUs lang="id" />
-      <a href="https://wa.me/6282213772860" target="_blank">
+      <a href="https://wa.me/085219455690" target="_blank">
         <aside className="fixed bottom-20 right-5 md:bottom-20 md:right-10 px-4 py-2 bg-lime-600 rounded-full text-white flex items-center gap-x-2 z-50">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_102_211)">

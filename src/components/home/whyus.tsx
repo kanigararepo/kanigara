@@ -70,7 +70,7 @@ export default function WhyUs({ lang }: Props) {
             </div>
           </div>
         </div>
-        <a href="https://wa.me/6282213772860" target="_blank" className="mx-auto bg-white px-6 py-2 rounded-full text-lime-600 font-bold hover:bg-slate-100 text-xl">
+        <a href="https://wa.me/085219455690" target="_blank" className="mx-auto bg-white px-6 py-2 rounded-full text-lime-600 font-bold hover:bg-slate-100 text-xl">
           {lang == "id" ? "Hubungi Kami" : "Contact Us"}
         </a>
       </div>

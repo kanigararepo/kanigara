@@ -11,7 +11,7 @@ export default function GrowWithUs({ lang }: Props) {
       <div className="outline outline-2 outline-lime-700 py-20 px-20 w-full rounded-3xl md:rounded-full h-96 relative overflow-hidden">
         <div className="w-full h-full flex flex-col justify-center items-center gap-y-10">
           <h1 className="font-bold font-sans text-3xl md:text-4xl text-center text-pretty">{lang == "id" ? "Mari Berjalan Bersama Kami" : "Come grow with us"}</h1>
-          <a href="https://wa.me/6282213772860" target="_blank" className="px-4 py-2 bg-lime-600 hover:bg-lime-700 text-white rounded-full font-bold ">
+          <a href="https://wa.me/085219455690" target="_blank" className="px-4 py-2 bg-lime-600 hover:bg-lime-700 text-white rounded-full font-bold ">
             {lang == "id" ? "Hubungi Kami" : "Contact Us"}
           </a>
         </div>
