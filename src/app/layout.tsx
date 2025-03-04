@@ -57,9 +57,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "WebSite",
               name: "Kanigara Nurseries",
               url: "https://kanigaranurseries.com",
+              alternateName: ["Kanigara", "Nurseries", "Kanigara Nurseries"],
               logo: "https://kanigaranurseries.com/favicon.ico",
               description: "Kanigara Nurseries menyediakan berbagai tanaman berkualitas untuk memperindah ruang hijau Anda.",
               sameAs: ["https://www.instagram.com/kanigara.nurseries?igsh=eTExeWM5NGRyNnNx"],
