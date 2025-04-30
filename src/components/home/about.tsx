@@ -14,7 +14,7 @@ export default function About({ lang }: Props) {
           <Image src={icon} alt="Icon Kanigara Nur Series" quality={100} className="max-w-8" />
           <figcaption className="text-xl text-lime-600 font-bold">KANIGARA NURSERIES</figcaption>
         </figure>
-        <h1 className="text-center font-bold text-3xl">PT EKA NUGRAHA SEJAHTERA</h1>
+        <h1 className="text-center font-bold text-3xl">PT NUGRAHA EKA SEJAHTERA</h1>
         <p className="text-center text-pretty text-lime-600 w-[90%] mx-auto">
           {lang == "id"
             ? "Kanigara Nurseries sejak 2014 secara konsisten telah membantu memenuhi kebutuhan klien, baik secara grosir maupun eceran, dan secara profesional mendedikasikan diri menjadi standar tertinggi hortikultura."
